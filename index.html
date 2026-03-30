@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voodoo Players Club — Proposal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Oswald:wght@300;400;600;700&display=swap');
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #161616;
+    --card2: #1c1a1e;
+    --purple: #7B4FBF;
+    --purple-light: #9B6FDF;
+    --purple-dark: #4a2d80;
+    --cream: #F0EAD6;
+    --cream-muted: #c8bfa8;
+    --red: #C0392B;
+    --red-light: #e74c3c;
+    --gold: #D4A843;
+    --border: rgba(123,79,191,0.3);
+    --border-light: rgba(240,234,214,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+    width: 850px;
+    margin: 0 auto;
+  }
+
+  .page {
+    background: var(--dark);
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    padding-bottom: 80px;
+  }
+
+  .cover {
+    background: var(--black);
+    border-bottom: 2px solid var(--purple);
+    padding: 60px 60px 50px;
+    text-align: center;
+    position: relative;
+  }
+
+  .cover::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(123,79,191,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .logo-wrap {
+    margin: 0 auto 32px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 2px solid var(--purple);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    position: relative;
+  }
+
+  .logo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cover-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 12px;
+  }
+
+  .cover-title {
+    font-family: 'Cinzel', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 8px;
+    text-shadow: 0 0 40px rgba(123,79,191,0.4);
+  }
+
+  .cover-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--purple-light);
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+  }
+
+  .cover-tagline {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream-muted);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .cover-tagline span { color: var(--purple-light); margin: 0 12px; }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 60px 0;
+    opacity: 0.4;
+  }
+
+  .divider-line { flex: 1; height: 1px; background: var(--border-light); }
+  .divider-skull { color: var(--purple); font-size: 14px; }
+
+  .section { padding: 48px 60px 0; }
+
+  .section-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 6px;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--cream);
+    border-bottom: 1px solid var(--purple-dark);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+  }
+
+  .section-title .accent { color: var(--purple-light); }
+
+  .body-text {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--cream-muted);
+    margin-bottom: 20px;
+  }
+
+  .body-text strong { color: var(--cream); font-weight: 600; }
+
+  .callout {
+    background: var(--card);
+    border-left: 3px solid var(--purple);
+    border-radius: 0 6px 6px 0;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .callout p {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--cream-muted);
+    font-style: italic;
+  }
+
+  .callout p strong { color: var(--cream); font-style: normal; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 24px;
+  }
+
+  .info-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+  }
+
+  .info-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 14px;
+  }
+
+  .info-card ul { list-style: none; padding: 0; }
+
+  .info-card li {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 16px;
+    color: var(--cream-muted);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(240,234,214,0.07);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .info-card li:last-child { border-bottom: none; }
+
+  .bullet-icon { color: var(--purple-light); font-size: 12px; margin-top: 4px; flex-shrink: 0; }
+
+  .points-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .point-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 14px;
+    text-align: center;
+  }
+
+  .point-card .pts {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--purple-light);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .point-card .pts.gold { color: var(--gold); }
+  .point-card .pts.red { color: var(--red-light); }
+
+  .point-card .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream-muted);
+  }
+
+  .timeline { margin-top: 24px; position: relative; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item { display: flex; gap: 24px; margin-bottom: 24px; position: relative; }
+
+  .tl-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--purple);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--purple-light);
+    z-index: 1;
+  }
+
+  .tl-content h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .tl-content p {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 16px;
+    color: var(--cream-muted);
+    line-height: 1.6;
+  }
+
+  .revenue-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .rev-card {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--purple);
+    border-radius: 8px;
+    padding: 20px 18px;
+    text-align: center;
+  }
+
+  .rev-card .rev-num {
+    font-family: 'Cinzel', serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .rev-card .rev-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream-muted);
+    margin-bottom: 10px;
+  }
+
+  .rev-card .rev-desc {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 14px;
+    color: var(--cream-muted);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .conduct-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .conduct-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--card);
+    border-radius: 8px;
+    padding: 16px 18px;
+    border: 1px solid var(--border-light);
+  }
+
+  .conduct-num {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--purple);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .conduct-item h5 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .conduct-item p {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 15px;
+    color: var(--cream-muted);
+    line-height: 1.5;
+  }
+
+  .closing {
+    background: var(--black);
+    border-top: 2px solid var(--purple-dark);
+    margin-top: 60px;
+    padding: 50px 60px;
+    text-align: center;
+  }
+
+  .closing h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 14px;
+  }
+
+  .closing p {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 17px;
+    color: var(--cream-muted);
+    font-style: italic;
+    max-width: 560px;
+    margin: 0 auto 28px;
+    line-height: 1.8;
+  }
+
+  .closing-badge {
+    display: inline-block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 28px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+  }
+
+  .month-structure {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .month-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .month-card-header {
+    background: var(--purple-dark);
+    padding: 10px 18px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+
+  .month-card-body { padding: 16px 18px; }
+
+  .week-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(240,234,214,0.07);
+  }
+
+  .week-row:last-child { border-bottom: none; }
+
+  .week-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream-muted);
+  }
+
+  .week-desc {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 15px;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  .champion-card {
+    background: var(--card2);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 20px 18px;
+    text-align: center;
+  }
+
+  .champion-card .trophy { font-size: 28px; margin-bottom: 8px; }
+
+  .champion-card h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.3;
+  }
+
+  .champion-card p {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 13px;
+    color: var(--cream-muted);
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  .page-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(240,234,214,0.2);
+    text-align: center;
+    padding-top: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="logo-wrap">
+      <img src="https://i.imgur.com/xIHZB7o.png" alt="Voodoo Players Club Logo" id="logo-img">
+    </div>
+    <div class="cover-eyebrow">Official Proposal — The Voodoo Cellar</div>
+    <div class="cover-title">The Voodoo<br>Players Club</div>
+    <div class="cover-subtitle">Beer Pong League</div>
+    <div class="cover-tagline">
+      Team Play <span>✦</span> Good People <span>✦</span> No Drama
+    </div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-label">Section 01</div>
+    <div class="section-title">The Vision <span class="accent">&</span> The Goal</div>
+    <p class="body-text">
+      The magic of beer pong is bringing people together — it fuels conversation, and keeps a crowd energized all night. The Voodoo Players Club exists to give that game the home it deserves, right here at The Voodoo Cellar.
+    </p>
+    <div class="callout">
+      <p>This isn't about running a tournament. It's about <strong>building a community.</strong> A group of regulars who know each other, look out for each other, and show up every Thursday because this is <strong>their place.</strong> The kind of crowd that makes a bar legendary.</p>
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <h4>Less Pressure on Staff</h4>
+        <ul>
+          <li><span class="bullet-icon">✦</span>Player-run format — community manages itself</li>
+          <li><span class="bullet-icon">✦</span>Registered teams mean known, accountable faces</li>
+          <li><span class="bullet-icon">✦</span>Clear conduct standards set expectations upfront</li>
+          <li><span class="bullet-icon">✦</span>Regulars naturally discourage bad behavior</li>
+          <li><span class="bullet-icon">✦</span>Predictable night flow — easy for staff to support</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>A Thriving Community</h4>
+        <ul>
+          <li><span class="bullet-icon">✦</span>Team identity and pride bring people back weekly</li>
+          <li><span class="bullet-icon">✦</span>Rivalries, friendships, and inside jokes grow here</li>
+          <li><span class="bullet-icon">✦</span>Players become ambassadors for the bar</li>
+          <li><span class="bullet-icon">✦</span>The Cellar becomes the undisputed home of pong</li>
+          <li><span class="bullet-icon">✦</span>Good energy is self-reinforcing — it builds on itself</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-skull">◆</div><div class="divider-line"></div></div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-label">Section 02</div>
+    <div class="section-title">League <span class="accent">Structure</span></div>
+    <p class="body-text">
+      The Voodoo Players Club runs as a <strong>weekly Thursday night league</strong> with registered 2-person teams. Players build standings over the course of each month, culminating in a Monthly Championship on the final Thursday. League nights run on the <strong>2nd, 3rd, 4th, and 5th Thursdays</strong> of each month.
+    </p>
+
+    <div class="month-structure">
+      <div class="month-card">
+        <div class="month-card-header">Monthly Calendar</div>
+        <div class="month-card-body">
+          <div class="week-row">
+            <span class="week-name">Week 2</span>
+            <span class="week-desc">League Night — standings begin</span>
+          </div>
+          <div class="week-row">
+            <span class="week-name">Week 3</span>
+            <span class="week-desc">League Night — rivalries form</span>
+          </div>
+          <div class="week-row">
+            <span class="week-name">Week 4</span>
+            <span class="week-desc">League Night — final push</span>
+          </div>
+          <div class="week-row">
+            <span class="week-name">Week 5</span>
+            <span class="week-desc" style="color: var(--gold);">Monthly Championship</span>
+          </div>
+        </div>
+      </div>
+      <div class="champion-card">
+        <div class="trophy">🏆</div>
+        <h4>Monthly Champions Crowned</h4>
+        <p>Top team, top individual & best vibes</p>
+      </div>
+    </div>
+
+    <p class="body-text" style="margin-top: 28px;">Each league night runs from <strong>8:00 PM check-in</strong> through <strong>10:45 PM</strong>, with an optional Night Final for top teams.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-dot">8:00</div>
+        <div class="tl-content">
+          <h4>Check-In</h4>
+          <p>Teams and players check in. Each active player earns +1 Show-Up point. Subs are arranged here if a partner can't make it.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot">8:30</div>
+        <div class="tl-content">
+          <h4>Team Matches Begin</h4>
+          <p>Scheduled matchups run through the evening. Teams stay with their registered partners when possible. Win = +2 pts, Loss = +1 pt per active player.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot">10:15</div>
+        <div class="tl-content">
+          <h4>Optional Night Final</h4>
+          <p>Top teams from the evening face off for bonus points, bragging rights, and the Night Winner title.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 36px;">Points System</div>
+    <div class="points-grid">
+      <div class="point-card">
+        <div class="pts">+1</div>
+        <div class="label">Show Up</div>
+      </div>
+      <div class="point-card">
+        <div class="pts">+2</div>
+        <div class="label">Match Win</div>
+      </div>
+      <div class="point-card">
+        <div class="pts">+1</div>
+        <div class="label">Match Loss</div>
+      </div>
+      <div class="point-card">
+        <div class="pts gold">+3</div>
+        <div class="label">Night Winner</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 28px;">
+      <p><strong>Individual tracking within team play.</strong> Even on a team-based league, points are tracked per player — so if your partner can't make it, you keep playing and keep earning. No forfeits, no wasted nights.</p>
+    </div>
+
+    <div class="section-label" style="margin-top: 28px;">Monthly Recognition</div>
+    <div class="two-col" style="margin-top: 12px;">
+      <div class="info-card">
+        <h4>Individual Awards</h4>
+        <ul>
+          <li><span class="bullet-icon">✦</span>Top Individual Player</li>
+          <li><span class="bullet-icon">✦</span>Most Consistent Attendee</li>
+          <li><span class="bullet-icon">✦</span>Best Vibes (community voted)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>Team Awards</h4>
+        <ul>
+          <li><span class="bullet-icon">✦</span>Top Team Record</li>
+          <li><span class="bullet-icon">✦</span>Monthly Champions</li>
+          <li><span class="bullet-icon">✦</span>Best Vibes Team</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-skull">◆</div><div class="divider-line"></div></div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-label">Section 03</div>
+    <div class="section-title">Community <span class="accent">&</span> Conduct</div>
+    <p class="body-text">
+      The Voodoo Players Club is built on a simple principle: <strong>the players own this community.</strong> When people have a team name, a ranking, and a reputation to protect, they show up differently. Regulars self-police because they have something to lose.
+    </p>
+    <div class="conduct-grid">
+      <div class="conduct-item">
+        <div class="conduct-num">01</div>
+        <div>
+          <h5>Respect is Non-Negotiable</h5>
+          <p>Trash talk stays fun. Personal attacks, aggression toward staff or other players ends your night — and potentially your season.</p>
+        </div>
+      </div>
+      <div class="conduct-item">
+        <div class="conduct-num">02</div>
+        <div>
+          <h5>Team Registration Required</h5>
+          <p>No anonymous walk-ins. Players register with a team name before competing. You own your record.</p>
+        </div>
+      </div>
+      <div class="conduct-item">
+        <div class="conduct-num">03</div>
+        <div>
+          <h5>Progressive Consequences</h5>
+          <p>First warning, then removal for the night, then suspension from the league. Clear and consistent.</p>
+        </div>
+      </div>
+      <div class="conduct-item">
+        <div class="conduct-num">04</div>
+        <div>
+          <h5>Good Vibes Points</h5>
+          <p>An optional +1 bonus each night for standout sportsmanship — rewarding the behavior we want to see more of.</p>
+        </div>
+      </div>
+      <div class="conduct-item">
+        <div class="conduct-num">05</div>
+        <div>
+          <h5>Staff Authority is Final</h5>
+          <p>Bar staff always have the last word. The league supports — never undermines — the staff's ability to manage the space.</p>
+        </div>
+      </div>
+      <div class="conduct-item">
+        <div class="conduct-num">06</div>
+        <div>
+          <h5>Fun Comes First</h5>
+          <p>Competition is the vehicle, not the destination. This is a social league — community and atmosphere are the priority.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-skull">◆</div><div class="divider-line"></div></div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-label">Section 04</div>
+    <div class="section-title">Revenue <span class="accent">&</span> Bar Benefits</div>
+    <p class="body-text">
+      A structured league night is one of the most efficient weekly revenue events a bar can run. Players <strong>arrive on time, stay longer, drink throughout,</strong> and bring friends to watch. Regulars become ambassadors.
+    </p>
+    <div class="revenue-grid">
+      <div class="rev-card">
+        <div class="rev-num">~20+</div>
+        <div class="rev-label">Players per night</div>
+        <div class="rev-desc">Registered teams fill consistent seats every Thursday</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-num">2.5 hrs</div>
+        <div class="rev-label">Average dwell time</div>
+        <div class="rev-desc">Check-in through finals keeps players in the bar all night</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-num">4×</div>
+        <div class="rev-label">Return visits per month</div>
+        <div class="rev-desc">Monthly season = 4 guaranteed visits per registered team</div>
+      </div>
+    </div>
+    <div class="two-col" style="margin-top: 20px;">
+      <div class="info-card">
+        <h4>Direct Revenue Drivers</h4>
+        <ul>
+          <li><span class="bullet-icon">✦</span>Optional team registration fee per season</li>
+          <li><span class="bullet-icon">✦</span>Bar patronage during league play</li>
+          <li><span class="bullet-icon">✦</span>Spectators & supporters in the bar</li>
+          <li><span class="bullet-icon">✦</span>Monthly Championship draws larger crowds</li>
+          <li><span class="bullet-icon">✦</span>Prize sponsorship tie-in opportunities</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>Indirect Business Value</h4>
+        <ul>
+          <li><span class="bullet-icon">✦</span>Consistent Thursday night foot traffic</li>
+          <li><span class="bullet-icon">✦</span>Social media content & organic promotion</li>
+          <li><span class="bullet-icon">✦</span>Word-of-mouth from an engaged community</li>
+          <li><span class="bullet-icon">✦</span>Bar becomes the "home" of a loyal group</li>
+          <li><span class="bullet-icon">✦</span>Low overhead — player-run with minimal staff lift</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <h3>Let's Build Something Worth Coming Back To</h3>
+    <p>The Voodoo Cellar already has the brand, the space, and the name recognition. The Voodoo Players Club gives that energy a home — a weekly ritual that fills your bar with people who are invested in being here.</p>
+    <div class="closing-badge">Team Play · Good People · No Drama</div>
+    <div class="page-num" style="margin-top: 20px;">The Voodoo Players Club — Beer Pong League at The Voodoo Cellar</div>
+  </div>
+
+</div>
+
+<script>
+  const img = document.getElementById('logo-img');
+  img.onerror = function() {
+    this.style.display = 'none';
+    this.parentElement.innerHTML = '<div style="font-family:serif;font-size:48px;color:#7B4FBF;text-align:center;line-height:220px;">☠</div>';
+  };
+</script>
+</body>
+</html>
